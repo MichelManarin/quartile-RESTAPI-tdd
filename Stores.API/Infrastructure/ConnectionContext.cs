@@ -31,11 +31,5 @@ namespace Stores.API.Infrastructure
                 optionsBuilder.UseSqlServer(connectionString);
             }
         }
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    //optionsBuilder.UseSqlServer("Server=tcp:quartile-test-store.database.windows.net,1433;Initial Catalog=quartile-test-store;Persist Security Info=False;User ID=michelm;Password=92908735aA;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=5;");
-        //    //base.OnConfiguring(optionsBuilder);
-        //}
     }
 }
