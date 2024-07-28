@@ -25,7 +25,7 @@ namespace Stores.API.Services
             return await Task.Run(() => _companyRepository.Get(id));
         }
 
-        public async void AddCompanyAsync(Company company)
+        public async Task AddCompanyAsync(Company company)
         {
             await Task.Run(() => _companyRepository.Add(company));
         }

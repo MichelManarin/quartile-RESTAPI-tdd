@@ -5,5 +5,5 @@ public interface ICompanyService
 {
     Task<List<Company>> GetAllCompaniesAsync();
     Task<Company?> GetByIdAsync(int id);
-    void AddCompanyAsync(Company company);
+    Task AddCompanyAsync(Company company);
 }

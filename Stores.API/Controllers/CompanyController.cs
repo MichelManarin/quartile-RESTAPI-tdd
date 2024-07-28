@@ -32,7 +32,7 @@ namespace Stores.API.Controllers
         }
 
         [HttpPost(Name = "AddCompany")]
-        public IActionResult Add(CompanyViewModel companyView)
+        public async Task<IActionResult> Add(CompanyViewModel companyView)
         {
             if (!ModelState.IsValid)
             {
@@ -51,7 +51,7 @@ namespace Stores.API.Controllers
                 
                 var company = new Company(companyView.Name, address);
 
-                _companyService.AddCompanyAsync(company);
+                await _companyService.AddCompanyAsync(company);
 
                 return Ok(new { message = "Company created with success" });
             }
