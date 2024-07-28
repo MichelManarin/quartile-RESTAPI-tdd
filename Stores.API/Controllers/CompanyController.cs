@@ -19,8 +19,16 @@ namespace Stores.API.Controllers
         [HttpGet(Name = "GetCompanies")]
         public async Task<IActionResult> Get() 
         {
-            var companys = await _companyService.GetAllCompaniesAsync();
-            return Ok(companys);
+            try
+            {
+                var companys = await _companyService.GetAllCompaniesAsync();
+                return Ok(companys);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while request companies");
+                return StatusCode(500, new { message = "An error occurred while processing your request" });
+            }
         }
 
         [HttpPost(Name = "AddCompany")]
