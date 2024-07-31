@@ -14,26 +14,26 @@ namespace Stores.API.Services
 
         public async Task<List<Store>> GetAllStoresAsync()
         {
-            return await Task.Run(() => _storeRepository.GetAll());
+            return await _storeRepository.GetAll();
         }
 
         public async Task AddStoreAsync(Store store)
         {
-            await Task.Run(() => _storeRepository.Add(store));
+            await _storeRepository.Add(store);
         }
 
         public async Task UpdateStoreAsync(int id, Store store)
         {
-            await Task.Run(() => _storeRepository.Update(id, store));
+            await _storeRepository.Update(id, store);
         }
         public async Task RemoveStoreAsync(int companyId, int id)
         {
-            await Task.Run(() => _storeRepository.Delete(companyId, id));
+            await _storeRepository.Delete(companyId, id);
         }
 
-        public Task<Store?> GetStoreByIdAndCompanyAsync(int companyId, int id)
+        public async Task<Store?> GetStoreByIdAndCompanyAsync(int companyId, int id)
         {
-            return Task.Run(() => _storeRepository.GetStore(companyId, id));
+           return await _storeRepository.GetStore(companyId, id);
         }
     }
 }

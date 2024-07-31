@@ -17,17 +17,17 @@ namespace Stores.API.Services
 
         public async Task<List<Company>> GetAllCompaniesAsync()
         {
-            return await Task.Run(() => _companyRepository.GetAll());
+            return await _companyRepository.GetAll();
         }
 
         public async Task<Company?> GetByIdAsync(int id)
         {
-            return await Task.Run(() => _companyRepository.Get(id));
+            return await _companyRepository.Get(id);
         }
 
         public async Task AddCompanyAsync(Company company)
         {
-            await Task.Run(() => _companyRepository.Add(company));
+            await _companyRepository.Add(company);
         }
     }
 }

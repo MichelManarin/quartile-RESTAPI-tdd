@@ -1,6 +1,5 @@
-﻿using Stores.API.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore;
 using Stores.API.Models;
-using System.ComponentModel.Design;
 
 namespace Stores.API.Infrastructure.Repositories
 {
@@ -13,24 +12,21 @@ namespace Stores.API.Infrastructure.Repositories
             _context = context;
         }
 
-        public void Add(Store store)
+        public async Task<List<Store>> GetAllAsync()
+        {
+            return await _context.Stores
+               .Include(s => s.Company)
+               .AsNoTracking()
+               .ToListAsync();
+        }
+
+        public async Task Add(Store store)
         {
             _context.Add(store);
-            _context.SaveChanges();
-        }
-        public Store? GetStore(int companyId, int id)
-        {
-            return _context.Stores
-                .Where(store => store.CompanyId == companyId && store.Id == id)
-                .FirstOrDefault();
+            await _context.SaveChangesAsync();
         }
 
-        public List<Store> GetAll()
-        {
-            return _context.Stores.ToList();
-        }
-
-        public void Delete(int companyId, int id)
+        public async Task Delete(int companyId, int id)
         {
             var store = _context.Stores
               .FirstOrDefault(s => s.Id == id && s.CompanyId == companyId);
@@ -41,9 +37,10 @@ namespace Stores.API.Infrastructure.Repositories
             }
 
             _context.Stores.Remove(store);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public void Update(int id, Store store)
+
+        public async Task Update(int id, Store store)
         {
             var existingStore = _context.Stores.Find(id);
 
@@ -56,7 +53,19 @@ namespace Stores.API.Infrastructure.Repositories
             existingStore.Address = store.Address;
             existingStore.PhoneNumber = store.PhoneNumber;
             existingStore.Address = store.Address;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+        }
+
+        async Task<Store?> IStoreRepository.GetStore(int companyId, int id)
+        {
+            return await _context.Stores
+                .Where(store => store.CompanyId == companyId && store.Id == id)
+                .FirstOrDefaultAsync();
+        }
+
+        async Task<List<Store>> IStoreRepository.GetAll()
+        {
+            return await _context.Stores.ToListAsync();
         }
     }
 }

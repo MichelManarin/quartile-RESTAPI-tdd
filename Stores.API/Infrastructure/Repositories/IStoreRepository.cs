@@ -4,10 +4,10 @@ namespace Stores.API.Infrastructure.Repositories
 {
     public interface IStoreRepository
     {
-        void Add(Store store);
-        void Delete(int companyId, int id);
-        void Update(int id, Store store);
-        Store? GetStore(int companyId, int id);
-        List<Store> GetAll();
+        Task Add(Store store);
+        Task Delete(int companyId, int id);
+        Task Update(int id, Store store);
+        Task<Store?> GetStore(int companyId, int id);
+        Task<List<Store>> GetAll();
     }
 }

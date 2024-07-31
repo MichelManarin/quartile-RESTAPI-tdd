@@ -1,4 +1,5 @@
-﻿using Stores.API.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore;
+using Stores.API.Infrastructure;
 using Stores.API.Models;
 
 namespace Stores.API.Infrastructure.Repositories
@@ -12,20 +13,20 @@ namespace Stores.API.Infrastructure.Repositories
             _context = context;
         }
 
-        public void Add(Company company)
+        public async Task Add(Company company)
         {
             _context.Add(company);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public List<Company> GetAll()
+        public async Task<List<Company>> GetAll()
         {
-            return _context.Companies.ToList();
+            return await _context.Companies.ToListAsync();
         }
 
-        public Company? Get(int id)
+        public async Task<Company?> Get(int id)
         {
-            return _context.Companies.Find(id);
+            return await _context.Companies.FindAsync(id);
         }
     }
 }

@@ -64,7 +64,7 @@ public class TestCompanyController
     }
 
     [Fact]
-    public void Post_OnSuccess_ReturnsOkObject()
+    public async void Post_OnSuccess_ReturnsOkObject()
     {
         var mockCompanyService = new Mock<ICompanyService>();
 
@@ -73,7 +73,7 @@ public class TestCompanyController
 
         var sut = new CompanyControllerFixture(mockCompanyService).CreateController();
 
-        var result = sut.Add(fakeCompanyView);
+        var result = await sut.Add(fakeCompanyView);
 
         Assert.IsType<OkObjectResult>(result);
     }
